@@ -47,8 +47,8 @@ $(document).ready(function () {
     for (var i = 0; i < 5; i++) {
       var forecastDiv = $("<div>");
 
-      forecastDiv.attr(fiveDays[i]);
       forecastDiv.addClass(fiveDays[i]);
+      forecastDiv.attr("days", fiveDays[i])
 
       $("#forecast-section").append(forecastDiv);
     }
@@ -87,7 +87,7 @@ $(document).ready(function () {
       var futureTemp = $("<h3>").text("Temp (F): " + response.list.main.temp);
       var futureHumidity = $("<h3>").text("Humidity: " + response.list.main.humidity);
 
-      $("#forecast-section").append(
+      $("days").append(
         futureDates,
         futureIcon,
         futureTemp,
