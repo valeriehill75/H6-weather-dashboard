@@ -1,69 +1,100 @@
-$(document).ready(function(){
+$(document).ready(function () {
+  $("#currentDay");
+  moment().format("MMM-DO-YY");
+  {
+    const today = moment();
+    console.log(today.format("MMM-Do-YY"));
+  }
 
-    $("#find-city").click(function(){
+  $("#find-city").click(function () {
+    var city = $("#chosen-city").val();
+    var lat = $().val();
+    var lon = $().val();
 
-        var city = $("#chosen-city").val();
-        var lat = $().val();
-        var lon = $().val();
+    if (city != "") {
+      $.ajax({
+        url:
+          "http://api.openweathermap.org/data/2.5/weather?q=" +
+          city +
+          "&units=imperial" +
+          "&APPID=0b53b2f717e335a70f4410190b051982",
+        type: "GET",
+        dataType: "jsonp",
+        uvData:
+          "http://api.openweathermap.org/data/2.5/uvi?" +
+          "&APPID=0b53b2f717e335a70f4410190b051982" +
+          lat +
+          lon,
+        forecastData:
+          "http://api.openweathermap.org/data/2.5/forecast?q=" +
+          city +
+          "&units=imperial" +
+          "&APPID=0b53b2f717e335a70f4410190b051982",
+        success: function (response) {
+          console.log(response);
 
-        if(city != ""){
+          var display = displayWeatherInfo(response);
 
-            $.ajax({
-                url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=0b53b2f717e335a70f4410190b051982",
-                type: "GET",
-                dataType: "jsonp",
-                uvData: "http://api.openweathermap.org/data/2.5/uvi?" + "&APPID=0b53b2f717e335a70f4410190b051982" + lat + lon,
-                success: function(response){
-                    console.log(response);
+          $("#current-day").html(display);
+          $("#current-day").val("");
+        },
+      });
+    } else {
+      $("#error").html("Field cannot be blank");
+    }
+    var fiveDays = ["dayOne", "dayTwo", "dayThree", "dayFour", "dayFive"];
 
-                    var display = displayWeatherInfo(response);
+    for (var i = 0; i < 5; i++) {
+      var forecastDiv = $("<div>");
 
-                    $("#current-day").html(display)
+      forecastDiv.attr(fiveDays[i]);
+      forecastDiv.addClass(fiveDays[i]);
 
-                }
-            })
+      $("#forecast-section").append(forecastDiv);
+    }
 
-        }else{
-            $("#error").html("Field cannot be blank");
-        }
-    })
+    function displayWeatherInfo(response) {
+      var cityName = $("<h3>").text(response.name);
+      const today = moment();
+      var todayDate = $("<h3>").text(response.dt)
+      var cityIcon = $(
+        "<img src='http://openweathermap.org/img/wn/" +
+          response.weather[0].icon +
+          ".png'>"
+      ).text(response.weather[0].icon);
+      var cityTemp = $("<h3>").text("Temperature (F): " + response.main.temp);
+      var cityHumidity = $("<h3>").text("Humidity: " + response.main.humidity);
+      var cityWindSpeed = $("<h3>").text("Wind Speed: " + response.wind.speed);
+      var cityUvIndex = $("<h3>").text("UV Index: " + response.uvData);
 
-function displayWeatherInfo(response) {
-    var cityName = $("<h3>").text(response.name);
-    var cityIcon = $("<h3>").append(response.weather.icon)
-    var cityTemp = $("<h3>").text("Temperature (F): " + response.main.temp);
-    var cityHumidity = $("<h3>").text("Humidity: " + response.main.humidity);
-    var cityWindSpeed = $("<h3>").text("Wind Speed: " + response.wind.speed);
-    var cityUvIndex = $("<h3>").text("UV Index: " + response.uvData)
+      $("#current-day").append(
+        cityName,
+        today,
+        todayDate,
+        cityIcon,
+        cityTemp,
+        cityHumidity,
+        cityWindSpeed,
+        cityUvIndex
+      );
 
-    $("#current-weather-section").append(cityName, cityIcon, cityTemp, cityHumidity, cityWindSpeed, cityUvIndex);
+      var futureDates = $("<h3>").text(response.list.dt_txt);
+      var futureIcon = $(
+        "<img src='http://openweathermap.org/img/wn/" +
+          response.list.weather[0].icon +
+          ".png'>"
+      ).text(response.list.weather[0].icon);
+      var futureTemp = $("<h3>").text("Temp (F): " + response.list.main.temp);
+      var futureHumidity = $("<h3>").text("Humidity: " + response.list.main.humidity);
 
-}    
+      $("#forecast-section").append(
+        futureDates,
+        futureIcon,
+        futureTemp,
+        futureHumidity,
+      );
 
-//    $("#currentDay");moment().format('dddd-MMMM-Do');{
-//        const today = moment();
-//        console.log(today.format('dddd-MMMM-Do'));
-//        $("#currentDay").text(today);
-//        }
+    }
 
-
-//}
-//$("find-city").on("click", function(event) {
-//    event.preventDefault();
-//    var cityInput = $("#city-input").val().trim();
-
-//    displayWeatherInfo(cityInput);
-// }
-
-
-// For Loop to create Five Day Forecast.
-//var forecastDiv = $("<div>");
-
-//    for (var i = 0; i < 5; i++) {
-
-//    forecastDiv.addClass("forecast");
-
-//    $("#forecast-section").append(forecastDiv);
-
-//}
-})
+  });
+});

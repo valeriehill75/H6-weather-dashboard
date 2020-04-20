@@ -33,3 +33,13 @@ h2 {
     width: 35px;
     color: white
 }
+
+.dayOne, .dayTwo, .dayThree, .dayFour, .dayFive {
+    background-color: cornflowerblue;
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+    float: left;
+    border-radius: 5px;
+
+}
