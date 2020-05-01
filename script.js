@@ -58,7 +58,7 @@ $(document).ready(function () {
       const today = moment();
       var todayDate = $("<h3>").text(response.dt)
       var cityIcon = $(
-        "<img src='http://openweathermap.org/img/wn/" +
+        "<img src='https://openweathermap.org/img/wn/" +
           response.weather[0].icon +
           ".png'>"
       ).text(response.weather[0].icon);
@@ -80,7 +80,7 @@ $(document).ready(function () {
 
       var futureDates = $("<h3>").text(response.list.dt_txt);
       var futureIcon = $(
-        "<img src='http://openweathermap.org/img/wn/" +
+        "<img src='https://openweathermap.org/img/wn/" +
           response.list.weather[0].icon +
           ".png'>"
       ).text(response.list.weather[0].icon);
