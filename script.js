@@ -14,19 +14,19 @@ $(document).ready(function () {
     if (city != "") {
       $.ajax({
         url:
-          "http://api.openweathermap.org/data/2.5/weather?q=" +
+          "https://api.openweathermap.org/data/2.5/weather?q=" +
           city +
           "&units=imperial" +
           "&APPID=0b53b2f717e335a70f4410190b051982",
         type: "GET",
         dataType: "jsonp",
         uvData:
-          "http://api.openweathermap.org/data/2.5/uvi?" +
+          "https://api.openweathermap.org/data/2.5/uvi?" +
           "&APPID=0b53b2f717e335a70f4410190b051982" +
           lat +
           lon,
         forecastData:
-          "http://api.openweathermap.org/data/2.5/forecast?q=" +
+          "https://api.openweathermap.org/data/2.5/forecast?q=" +
           city +
           "&units=imperial" +
           "&APPID=0b53b2f717e335a70f4410190b051982",
