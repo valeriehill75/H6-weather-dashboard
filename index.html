@@ -3,83 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css"></link>
+    <title>Weather Dashboard</title>
 </head>
 
 <body>
-    <h1>Weather Dashboard</h1>
-    <h2>Search for a City:</h2>
-    <input id="chosen-city" class="city-input"></input>
-    <button id="find-city" class="city-button">?</button>
-    <span id="error"></span>
+    <header>
+      <h1>Weather Dashboard</h1>
+    </header>
 
-    <div class="wrapper">
-
-        <div class="row">
-            <div class="col-sm-12">
-              <br>
-      
-              <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
-              <div class="card">
-      
-                <!-- card Heading -->
-                <div class="card-header">
-                  <strong>Current Weather:</strong>
-                </div>
-      
-                <!-- This main card will hold city details -->
-                <div class="card-body" id="current-weather-section">
-                    <div id="current-day"></div>
-
-                </div>
-              </div>
+    <div class="container-fluid">
+      <div class="row">
+        <aside class="col-lg-3 bg-light">
+          <h4>Search for a City:</h4>
+            <div class="form-inline form-group">
+              <input id="search-value" class="city-input"></input>
+              <button id="search-button" class="city-button"> ? </button>
+              <span id="error"></span>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-              <br>
-      
-              <div class="card">
-      
-                <div class="card-header">
-                  <strong>Five Day Forecast:</strong>
-                </div>
-      
-                <!-- This main card will hold each of the resulting articles -->
-                <div class="card-body" id="forecast-section">
-
-                </div>
-              </div>
+            <div>
+              <strong>Recently Searched:</strong>
+              <ul class="list-group history"></ul>
             </div>
+        </aside>
+
+        <div class="col-lg-9">
+          <div id="current-weather" class="mt-3"></div>
+          <div id="forecast" class="mt-3"></div>
         </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-              <br>
-      
-              <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
-              <div class="card">
-      
-                <!-- card Heading for the retrieved articles box -->
-                <div class="card-header">
-                  <strong>Recently Searched:</strong>
-                </div>
-      
-                <!-- This main card will hold each of the recently searched cities -->
-                <div class="card-body" id="recently-searched">
-
-                </div>
-              </div>
-            </div>
-        </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script type="text/javascript" src="script.js"></script>
-    </div>    
-
+      </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>    
 </body>
 </html>
